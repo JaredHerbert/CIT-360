@@ -1,0 +1,34 @@
+class Product {
+    ... 
+}
+
+// Making something new
+Product product = new Product();
+
+// Name the product
+product.Name = "Apple";
+
+// Put a termination date.
+product.ExpiryDate = new DateTime(2008, 12, 28);
+
+// Setting product price
+product.Price = 3.99M;
+
+//Creating a list of sizes
+product.Sizes = new string[] { "Small", "Medium", "Large" };
+
+//Converting from the java object to JSON string.
+string output = JsonConvert.SerializeObject(product);
+//"{
+//  "Name": "Apple",
+//  "ExpiryDate": "2008-12-28T00:00:00",
+//  "Price": 3.99,
+//  "Sizes": [
+//    "Small",
+//    "Medium",
+//    "Large"
+//  ]
+//}"
+
+//Convert JSON string to java object.
+Product deserializedProduct = JsonConvert.DeserializeObject<Product>(output);
