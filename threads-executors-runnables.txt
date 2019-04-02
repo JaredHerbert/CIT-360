@@ -1,0 +1,43 @@
+// Threads, executors, and runnables.
+
+// Implementing runnable
+public class Task implements Runnable {
+    private String name;
+ 
+    public Task(String name) {
+        this.name = name;
+    }
+ 
+    public String getName() {
+        return name;
+    }
+ 
+    public void run() {
+        try {
+            Long duration = (long) (Math.random() * 10);
+            System.out.println("Executing : " + name);
+            TimeUnit.SECONDS.sleep(duration);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+// Creating an executor and scheduling tasks
+{
+
+// Creating a thread pool
+ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
+         
+for (int i = 1; i <= 5; i++)
+{
+    // Creating task to be run in a thread
+    Task task = new Task("Task " + i);
+    System.out.println("Created : " + task.getName());
+   
+    // start running each task in its own thread
+    executor.execute(task);
+}
+// Wait for all threads to finish, and shut down.
+executor.shutdown();
+}
