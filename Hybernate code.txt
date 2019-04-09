@@ -1,27 +1,38 @@
 //Before Hibernate
 
-//creating configuration  
-Configuration cfg=new Configuration();    
-cfg.configure("hibernate.cfg.xml");    
-    
-//creating seession factory object    
-SessionFactory factory=cfg.buildSessionFactory();    
-    
-//creating session object    
-Session session=factory.openSession();    
-    
-//creating transaction object    
-Transaction t=session.beginTransaction();    
-        
-Employee e1=new Employee(111,"arun",40000);    
-session.persist(e1);//persisting the object    
-    
-t.commit();//transaction is commited    
-session.close();    
+import org.hibernate.Session;  
+import org.hibernate.SessionFactory;  
+import org.hibernate.Transaction;  
+import org.hibernate.cfg.Configuration;  
+
+public class Hibernatedemo
+{
+    public static void main (String[] args) 
+    {
+        //creating configuration  
+        Configuration cfg=new Configuration();    
+        cfg.configure("hibernate.cfg.xml");    
+
+        //creating seession factory object    
+        SessionFactory factory=cfg.buildSessionFactory();    
+
+        //creating session object    
+        Session session=factory.openSession();    
+
+        //creating transaction object    
+        Transaction t=session.beginTransaction();    
+
+        Employee e1=new Employee(111,"arun",40000);    
+        session.persist(e1);//persisting the object    
+
+        t.commit();//transaction is commited    
+        session.close();    
 
 
 
-//Using Hibernate to make a simpler code that does the same thing
+        //Using Hibernate to make a simpler code that does the same thing
 
-Employee e1=new Employee(111,"arun",40000);    
-hibernateTemplate.save(e1);  
+        Employee e1=new Employee(111,"arun",40000);    
+        hibernateTemplate.save(e1);  
+    }
+}
