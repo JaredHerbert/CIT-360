@@ -2,6 +2,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+----------------------------------------------------
+Example 1
+----------------------------------------------------
+
 public class MyTests {
 
     @Test
@@ -14,3 +18,101 @@ public class MyTests {
         assertEquals(0, tester.multiply(0, 0), "0 x 0 must be 0");
     }
 }
+----------------------------------------------------
+Example 2
+----------------------------------------------------
+public class AssertionExample {
+    .............
+  @Test
+  public void test5() {
+      int[] integers = {3, 5, 7};
+      Assert.assertArrayEquals("The numbers are not equal", integers, new int[]{3, 5, 7});
+  }
+
+  @Test
+  public void test6() {
+      Object[] integers = {3, 5, new int[]{7, 9}};
+      Assert.assertArrayEquals("The numbers are not equal", integers,
+              new Object[]{3, 5, new int[]{7, 9}});
+  }
+    .............
+}
+----------------------------------------------------
+Example 3
+----------------------------------------------------
+
+public class AssertionExample {
+    .............
+  @Test
+  public void test7() {
+      String str1 = new String("test string");
+      String str2 = new String("test string");
+      Assert.assertSame("Same objects reference failed", str1, str1);
+      Assert.assertNotSame("Different objects not same failed", str2, str1);
+      Assert.assertSame("Different objects reference but have same value failed", str2, str1);
+  }
+    .............
+}
+
+----------------------------------------------------
+Example 4
+----------------------------------------------------
+  
+  public interface Matcher<T> extends SelfDescribing {
+    boolean matches(Object var1);
+
+    void describeMismatch(Object var1, Description var2);
+
+    /** @deprecated */
+    @Deprecated
+    void _dont_implement_Matcher___instead_extend_BaseMatcher_();
+}
+  
+----------------------------------------------------
+Example 5
+----------------------------------------------------
+
+public class AssertionExample {
+    .............
+  @Test
+  public void test9() {
+      int i = 22;
+      Assert.assertThat(i, createMultipleOfTwoMatcher());
+  }
+
+  private BaseMatcher<Integer> createMultipleOfTwoMatcher() {
+      return new BaseMatcher<Integer>() {
+
+          @Override
+          public void describeTo(Description description) {
+              description.appendText("Not a multiple of 2.");
+          }
+
+          @Override
+          public boolean matches(Object item) {
+              Integer integer = (Integer) item;
+              return integer != null && integer % 2 == 0;
+          }
+      };
+  }
+    .............
+}
+
+----------------------------------------------------
+Example 6
+----------------------------------------------------
+
+public class AssertionExample {
+    .............
+  @Test
+  public void test11() {
+      String str = "test string";
+      String str2 = null;
+      Assert.assertNotNull("The str is null.", str);
+      Assert.assertNull("The str is not null.", str2);
+  }
+    .............
+}
+
+
+
